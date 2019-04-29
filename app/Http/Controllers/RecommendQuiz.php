@@ -80,4 +80,35 @@ class RecommendQuiz extends Controller
         }
         return json_encode($response);
     }
+public function reccomendQuiz($id)
+    {
+        $alluser= $this->GetAllUsers();
+        $allquizzes=$this->GetAllQuizess();
+
+        $alluser2=json_decode($alluser);
+        $allquizzes2=json_decode($allquizzes);
+
+        $response=array();
+
+
+        foreach($alluser2 as $user)
+        {
+            foreach($allquizzes2 as $quiz)
+            {
+                if($quiz->skill_type->name==$user->interests&&$user->id==$id)
+                {
+                    $response[]=array(
+                        $user->id=>array(
+                            'user name' =>$user->username,
+                            'quiz title' => $quiz->title,
+                            'pass score' => $quiz->pass_score,
+                            'common skills' =>$user->interests
+                        )
+
+                    );
+                }
+            }
+        }
+        return json_encode($response);
+    }
 }
