@@ -81,6 +81,34 @@ public function reccommendCompanies()
         }
         return json_encode($response);
     }
+public function reccommendCompany($id)
+    {
+        $alluser= $this->GetAllUsers();
+        $allcompanies= $this->GetAllCompanies();
+        $alluser2= json_decode($alluser,true);
+        $allcompanies2=json_decode($allcompanies,true);
+
+        $response=array();
+        foreach($alluser2 as $user)
+        {
+            foreach($allcompanies2 as $company)
+            {
+                if($user['interests']==$company['company_interests'] && $user['score']>=$company['rec_score']&&$user['id']==$id)
+                {
+                    $response[]=array(
+                        $user['id']=>array(
+                            'user name' =>$user['username'],
+                            'company name' => $company['companyname'],
+                            'company id' => $company['cid'],
+                            'common interest' =>$user['interests']
+                        )
+
+                    );
+                }
+            }
+        }
+        return json_encode($response);
+    }
     
 
 }
