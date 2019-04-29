@@ -30,6 +30,29 @@ class RecommendCompany extends Controller
         ));
         return json_encode($response);
     }
+public function GetAllCompanies()
+    {
+        $response=array(
+            array(
+                    'cid'=>0,
+                    'companyname'=>'google',
+                    'company_interests' =>'software',
+                    'rec_score'=>20
+            ),array(
+                'cid'=>1,
+                'companyname'=>'valeo',
+                'company_interests' =>'software',
+                'rec_score'=>9
+
+            ),array(
+                'cid'=>2,
+                'companyname'=>'testing',
+                'company_interests' =>'worker',
+                'rec_score'=>25
+
+            ));
+            return json_encode($response);
+    }
     
 
 }
